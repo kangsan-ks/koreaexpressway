@@ -79,15 +79,15 @@
     @endif
     @if (request()->segment(2) == 'press')
     <div class="list_style_04 list_style flex_box">
-        <div class="date_line">
+        <div class="date_line mo_none">
             <ul>
                 @foreach ($data as $data)
                     <li>{{ $data->start_period }}</li>
                 @endforeach
             </ul>
         </div>
-        <div class="bar_line"></div>
-        <div class="content_line">
+        <div class="bar_line mo_none"></div>
+        <div class="content_line mo_none">
             <ul>
                 @foreach ($data2 as $data2)
                 <li>
@@ -105,6 +105,18 @@
                     </p>
                 </li> --}}
             </ul>
+        </div>
+        <div class="mo_block">
+            @foreach ($data3 as $data3)
+            <div class="date_line">
+                <p>{{ $data3->start_period }}</p>
+            </div>
+            <div class="content_line">
+                <h4><a href="{{ $data3->link_value }}" target="blank">{{ $data3->subject }}</a></h4>
+                <span><img src="/storage/app/images/{{ $data3->real_file_name }}" alt=""> ㅣ {{ $data3->start_period }}</span>
+                {!! $data3->contents !!}
+            </div>
+            @endforeach
         </div>
     </div>
     @endif

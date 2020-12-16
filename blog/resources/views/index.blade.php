@@ -1,5 +1,6 @@
 @include('inc/head')
 {{-- <script src="/js/vue.min.js"></script> --}}
+<?php include $_SERVER['DOCUMENT_ROOT']."/popup.php"; ?>
 <div id="pop_bg">
     <div class="bg_inner">
         <div class="close_btn">x</div>
@@ -101,7 +102,7 @@
             <ul class="flex_box">
                 @foreach ($latest2 as $latest2)
                 <li>
-                    <a href="{{ $latest->idx }}">
+                    <a href="/news/press/view?idx={{ $latest2->idx }}">
                         <div class="img_box">
                             <img src="/storage/app/images/{{ $latest2->real_file_name }}" alt="">
                         </div>
@@ -144,15 +145,17 @@
                         </p>
                     </div>
                 </div>
-                <div class="right">
+                <div class="right m_flex_box">
                     @foreach ($video as $video)
-                    <div class="img_box">
-                        <img class="video_view" src="/storage/app/images/{{ $video->real_file_name }}" alt="" data-video-url="{{ $video->link_value }}">
-                    </div>
-                    <div class="text_box mb">
-                        <p class="subject text_ec">
-                            {{ $video->subject }}
-                        </p>
+                    <div class="">
+                        <div class="img_box">
+                            <img class="video_view" src="/storage/app/images/{{ $video->real_file_name }}" alt="" data-video-url="{{ $video->link_value }}">
+                        </div>
+                        <div class="text_box mb">
+                            <p class="subject text_ec">
+                                {{ $video->subject }}
+                            </p>
+                        </div>
                     </div>
                     @endforeach
 

@@ -24,6 +24,16 @@
         </div>
         <div class="paging_board">
             <ul>
+                @if($file_check == true)
+                @foreach ($data_file_info as $data_file_info)
+                    
+                
+                <li class="file_items">
+                    <img src="/img/download_ico.png" alt="">
+                    <a href="/storage/app/images/{{ $data_file_info->real_file_name }}" download="{{ $data_file_info->file_name }}" target="_blank">{{ $data_file_info->file_name }}</a>
+                </li>
+                @endforeach
+                @endif
                 @if($prev_item_check == true)
                 <li class="view_inner">
                     <img src="/img/paging_board_up.png" alt=""><p>이전글</p><a href="/{{ request()->segment(1).'/'.request()->segment(2).'/view?idx='.$data_prev->idx }}">이전글입니다.</a>
@@ -37,7 +47,7 @@
             </ul>
         </div>
         <div class="go_back_btn">
-            <a href="#none" onclick="history.back();">목록</a>
+            <a href="/{{ request()->segment(1).'/'.request()->segment(2).'/list' }}">목록</a>
         </div>
     </div>
 </div>

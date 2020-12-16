@@ -155,7 +155,7 @@ class Front extends Controller
 		}
 
 		$paging_option = array(
-			"pageSize" => 10,
+			"pageSize" => 5,
 			"blockSize" => 5
 		);
 
@@ -240,79 +240,84 @@ class Front extends Controller
 	
 	public function page_search(Request $request) {
 
-		$list_press = DB::table('board')
-				->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
-				->where('board_type', 'press')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->get();
-		$list_event = DB::table('board')
-				->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
-				->where('board_type', 'event')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->get();
-		$list_start = DB::table('board')
-				->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
-				->where('board_type', 'start')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->get();
-		$list_article = DB::table('board')
-				->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
-				->where('board_type', 'article')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->get();
-		$list_report = DB::table('board')
-				->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
-				->where('board_type', 'report')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->get();
-		$list_gallery = DB::table('board')
-				->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
-				->where('board_type', 'gallery')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->get();
-		$list_press_cnt = DB::table('board')
-				->select(DB::raw('*'))
-				->where('board_type', 'press')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->count();
-		$list_event_cnt = DB::table('board')
-				->select(DB::raw('*'))
-				->where('board_type', 'event')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->count();
-		$list_start_cnt = DB::table('board')
-				->select(DB::raw('*'))
-				->where('board_type', 'start')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->count();
-		$list_article_cnt = DB::table('board')
-				->select(DB::raw('*'))
-				->where('board_type', 'article')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->count();
-		$list_report_cnt = DB::table('board')
-				->select(DB::raw('*'))
-				->where('board_type', 'report')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->count();
-		$list_gallery_cnt = DB::table('board')
-				->select(DB::raw('*'))
-				->where('board_type', 'gallery')
-				->where($request->search_option, 'like', '%'.$request->search_value.'%')
-				->count();
+		if( isset($_GET['search_value'])){
 
-		$return_list["list_press"] = $list_press;
-		$return_list["list_event"] = $list_event;
-		$return_list["list_start"] = $list_start;
-		$return_list["list_article"] = $list_article;
-		$return_list["list_report"] = $list_report;
-		$return_list["list_gallery"] = $list_gallery;
-		$return_list["list_press_cnt"] = $list_press_cnt;
-		$return_list["list_event_cnt"] = $list_event_cnt;
-		$return_list["list_start_cnt"] = $list_start_cnt;
-		$return_list["list_article_cnt"] = $list_article_cnt;
-		$return_list["list_report_cnt"] = $list_report_cnt;
-		$return_list["list_gallery_cnt"] = $list_gallery_cnt;	
+			$list_press = DB::table('board')
+					->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
+					->where('board_type', 'press')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->get();
+			$list_event = DB::table('board')
+					->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
+					->where('board_type', 'event')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->get();
+			$list_start = DB::table('board')
+					->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
+					->where('board_type', 'start')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->get();
+			$list_article = DB::table('board')
+					->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
+					->where('board_type', 'article')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->get();
+			$list_report = DB::table('board')
+					->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
+					->where('board_type', 'report')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->get();
+			$list_gallery = DB::table('board')
+					->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
+					->where('board_type', 'gallery')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->get();
+			$list_press_cnt = DB::table('board')
+					->select(DB::raw('*'))
+					->where('board_type', 'press')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->count();
+			$list_event_cnt = DB::table('board')
+					->select(DB::raw('*'))
+					->where('board_type', 'event')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->count();
+			$list_start_cnt = DB::table('board')
+					->select(DB::raw('*'))
+					->where('board_type', 'start')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->count();
+			$list_article_cnt = DB::table('board')
+					->select(DB::raw('*'))
+					->where('board_type', 'article')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->count();
+			$list_report_cnt = DB::table('board')
+					->select(DB::raw('*'))
+					->where('board_type', 'report')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->count();
+			$list_gallery_cnt = DB::table('board')
+					->select(DB::raw('*'))
+					->where('board_type', 'gallery')
+					->where($request->search_option, 'like', '%'.$request->search_value.'%')
+					->count();
+
+			$return_list["list_press"] = $list_press;
+			$return_list["list_event"] = $list_event;
+			$return_list["list_start"] = $list_start;
+			$return_list["list_article"] = $list_article;
+			$return_list["list_report"] = $list_report;
+			$return_list["list_gallery"] = $list_gallery;
+			$return_list["list_press_cnt"] = $list_press_cnt;
+			$return_list["list_event_cnt"] = $list_event_cnt;
+			$return_list["list_start_cnt"] = $list_start_cnt;
+			$return_list["list_article_cnt"] = $list_article_cnt;
+			$return_list["list_report_cnt"] = $list_report_cnt;
+			$return_list["list_gallery_cnt"] = $list_gallery_cnt;	
+		}else{
+			$return_list = array();
+		}
 
 		return view('sub/search', $return_list);
 	}
@@ -326,31 +331,51 @@ class Front extends Controller
 
 		$list_next = DB::table('board')
 					->select(DB::raw('*'))
-					->where('board_type', 'segment(2)')
+					->where('board_type', request()->segment(2))
 					->where('idx', '>', $request->idx)
 					->orderBy('idx', 'asc')
 					->first();
 
 		$list_prev = DB::table('board')
 					->select(DB::raw('*'))
-					->where('board_type', 'segment(2)')
+					->where('board_type', request()->segment(2))
 					->where('idx', '<', $request->idx)
 					->orderBy('idx', 'desc')
 					->first();
 
 		$list_next_cnt = DB::table('board')
 					->select(DB::raw('*'))
-					->where('board_type', 'segment(2)')
+					->where('board_type', request()->segment(2))
 					->where('idx', '>', $request->idx)
 					->orderBy('idx', 'desc')
 					->count();
 
 		$list_prev_cnt = DB::table('board')
 					->select(DB::raw('*'))
-					->where('board_type', 'segment(2)')
+					->where('board_type', request()->segment(2))
 					->where('idx', '<', $request->idx)
 					->orderBy('idx', 'desc')
 					->count();
+
+		$list_files = DB::table('file_list')
+					->select(DB::raw('*'))
+					->where('parent_idx', $request->idx)
+					->where('contents', 'files')
+					->orderBy('idx', 'asc')
+					->get();
+
+		$list_files_cnt = DB::table('file_list')
+					->select(DB::raw('*'))
+					->where('parent_idx', $request->idx)
+					->where('contents', 'files')
+					->orderBy('idx', 'asc')
+					->count();
+
+		if($list_files_cnt != ''){
+			$file_check = true;
+		}else{
+			$file_check = false;
+		}
 					
 		if($list_prev_cnt != ''){
 			$prev_item_check = true;
@@ -369,7 +394,9 @@ class Front extends Controller
         $return_list["data_prev"] = $list_prev;
         $return_list["prev_item_check"] = $prev_item_check;
         $return_list["next_item_check"] = $next_item_check;
-
+        $return_list["data_file_info"] = $list_files;
+        $return_list["file_check"] = $file_check;
+		
 		return view('sub/view', $return_list);
 
     }
@@ -441,6 +468,7 @@ class Front extends Controller
 		$return_list["board_top_list"] = $board_top_list;
 		$return_list["data"] = $list;
 		$return_list["data2"] = $list;
+		$return_list["data3"] = $list;
 		$return_list["number"] = $number;
 		$return_list["key"] = $request->key;
 		$return_list["totalCount"] = $totalCount;

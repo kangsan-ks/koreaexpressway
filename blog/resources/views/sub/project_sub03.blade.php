@@ -2,16 +2,26 @@
 <div class="content_wrap inner project_sub">
     <div class="sec_top">
         <div class="flex_box">
-            <div class="img_box">
-                <img src="/img/project_sub03_img01.png" alt="">
-            </div>
             <div class="text_box">
-                <div class="top_line">
+                <div class="top_line mo_block">
                     <p>Project</p>
                     <span class="bar"></span>
                     <p class="color_blue"><b>03</b></p>
                 </div>
                 <h2>
+                    스마트 안전<br/>통합 관제기술
+                </h2>
+            </div>
+            <div class="img_box">
+                <img src="/img/project_sub03_img01.png" alt="">
+            </div>
+            <div class="text_box">
+                <div class="top_line mo_none">
+                    <p>Project</p>
+                    <span class="bar"></span>
+                    <p class="color_blue"><b>03</b></p>
+                </div>
+                <h2 class="mo_none">
                     스마트 안전<br/>통합 관제기술
                 </h2>
                 <p>
@@ -45,6 +55,9 @@
             <div class="tabs_info">
                 <ul class="tabs_info_inner">
                     <li class="flex_box">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub03_img02.png" alt="">
+                        </div>
                         <h3>스마트 안전 통합 관제 시스템 개발</h3>
                         <div class="text_box">
                             <p>
@@ -56,11 +69,14 @@
                             <div class="line_blue">건설현장 긴급재해 대응 기술 개발</div>
                             <div class="line_blue">디지털 트윈 기반의 스마트 안전 통합 관제 시스템 개발</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub03_img02.png" alt="">
                         </div>
                     </li>
                     <li class="flex_box" style="display: none">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub03_img03.png" alt="">
+                        </div>
                         <h3>건설현장 근로자 안전확보 기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -70,11 +86,14 @@
                             <div class="line_blue">건설현장 근로자 위험요인 인지 기술 개발</div>
                             <div class="line_blue">현장 맞춤형 근로자 위험 예방 및 평가 기술 개발</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub03_img03.png" alt="">
                         </div>
                     </li>
                     <li class="flex_box" style="display: none">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub03_img04.png" alt="">
+                        </div>
                         <h3>임시구조물 스마트 안전확보 기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -84,7 +103,7 @@
                             <div class="line_blue">가설기자재 품질관리 기술개발</div>
                             <div class="line_blue">임시구조물 설치·해체, 운영 시 스마트 안전 확보 기술 개발</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub03_img04.png" alt="">
                         </div>
                     </li>

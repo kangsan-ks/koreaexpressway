@@ -2,10 +2,7 @@
 <div class="content_wrap inner project_sub">
     <div class="sec_top">
         <div class="flex_box">
-            <div class="img_box">
-                <img src="/img/project_sub01_img01.png" alt="">
-            </div>
-            <div class="text_box">
+            <div class="text_box mo_block">
                 <div class="top_line">
                     <p>Project</p>
                     <span class="bar"></span>
@@ -13,8 +10,18 @@
                 </div>
                 <h2>
                     건설장비 관제<br/>
-                    및 자동화                    
+                    및 자동화
                 </h2>
+            </div>
+            <div class="img_box">
+                <img src="/img/project_sub01_img01.png" alt="">
+            </div>
+            <div class="text_box">
+                <div class="top_line mo_none">
+                    <p>Project</p>
+                    <span class="bar"></span>
+                    <p class="color_blue"><b>01</b></p>
+                </div>
                 <p>
                     드론 및 지상차량(UGV)의 자율 계측을 통해 취득한 현장 지형정보를
                     통합하여 초정밀 Digital Map을 생성하고, 이를 도로 건설장비 자동화 기술
@@ -47,6 +54,9 @@
             <div class="tabs_info">
                 <ul class="tabs_info_inner">
                     <li class="flex_box">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub01_img02.png" alt="">
+                        </div>
                         <h3>지능형 건설장비 관제기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -56,11 +66,14 @@
                             <div class="line_blue">지능형 토공/포장 장비 관제 시스템 기술</div>
                             <div class="line_blue">스마트 네트워크 기반 토공/포장 장비 IoT 운영 및 무인화 기술</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub01_img02.png" alt="">
                         </div>
                     </li>
                     <li class="flex_box" style="display: none">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub01_img03.png" alt="">
+                        </div>
                         <h3>건설현장 정보 수집 및 분석 기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -70,11 +83,14 @@
                             <div class="line_blue">자율계측 기반 초정밀 Digital Map 구축 기술</div>
                             <div class="line_blue">디지털 트윈 기반 건설 현장정보 분석 및 맵핑 기술</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub01_img03.png" alt="">
                         </div>
                     </li>
                     <li class="flex_box" style="display: none">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub01_img04.png" alt="">
+                        </div>
                         <h3>디지털 기반 건설장비 자동화 기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -87,7 +103,7 @@
                             <div class="line_blue">고정밀 작업가능 자율작업형 건설장비 제어 기술</div>
                             <div class="line_blue">시공장비 연동 도로포장 품질관리 및 향상 기술</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub01_img04.png" alt="">
                         </div>
                     </li>

@@ -1,5 +1,8 @@
 @include('inc/head')
 <div class="content_wrap inner search">
+    <?php
+        if(isset($_GET['search_value'])){
+    ?>
     <div class="top_">
         <h2><span>‘<?=$_GET['search_value']?>’</span>에 대한 통합검색 결과입니다.</h2>
         <div class="search_box">
@@ -113,5 +116,22 @@
             </ul>
         </div>
     </div>
+    <?php }else{ ?>
+        <div class="top_">
+            <h2>통합검색 페이지입니다.</h2>
+            <div class="search_box">
+                <form action="/search/page_search">
+                    <select name="search_option" id="">
+                        <option value="subject">제목</option>
+                        <option value="contents">내용</option>
+                    </select>
+                    <input type="text" name="search_value" placeholder="검색어를 입력해주세요." value="">
+                    <button type="submit">
+                        <img src="/img/search_ico.png" alt="">
+                    </button>
+                </form>
+            </div>
+        </div>
+    <?php } ?>
 </div>
 @include('inc/footer')

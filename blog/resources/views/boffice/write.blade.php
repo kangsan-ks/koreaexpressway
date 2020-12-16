@@ -10,6 +10,93 @@
         <input type="hidden" name="write_type" value="{{ request()->segment(3) }}" />
         <input type="hidden" name="writer" value="{{ session('user_id') }}" />
         <input type="hidden" name="parent_idx" value="{{ session('user_idx') }}" />
+        @if (request()->segment(2) == 'popup')
+        <div class="write_box">
+            <div class="write_line">
+                <div class="all_line all_line_top">
+                    <div class="line_title">
+                        카테고리
+                    </div>
+                    <div class="line_content">
+						<input type="text" name="category" value="popup" readonly style="border:none;" />
+                    </div>
+                </div>
+			</div>
+			<div class="write_line">
+                <div class="all_line">
+                    <div class="line_title">
+                        제목
+                    </div>
+                    <div class="line_content">
+                        <input type="text" name="subject" value="{{ $data->title }}" />
+                    </div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업위치
+                    </div>
+                    <div class="line_content">
+                        <label for="lefttop"><input type="radio" name="pop_position" id="lefttop" value="lefttop" @if ($data->pop_position == 'lefttop') checked @endif/>좌측상단</label>
+                        <label for="righttop"><input type="radio" name="pop_position" id="righttop" value="righttop" @if ($data->pop_position == 'righttop') checked @endif/>우측상단</label>
+                        <label for="leftbot"><input type="radio" name="pop_position" id="leftbot" value="leftbot" @if ($data->pop_position == 'leftbot') checked @endif/>좌측하단</label>
+                        <label for="rightbot"><input type="radio" name="pop_position" id="rightbot" value="rightbot" @if ($data->pop_position == 'rightbot') checked @endif/>우측하단</label>
+                    </div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업크기
+                    </div>
+                    <div class="line_content">
+                        가로 : <input type="number" name="i_width" value="{{ $data->i_width }}" />
+                        세로 : <input type="number" name="i_height" value="{{ $data->i_height }}" />
+                    </div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업여백
+                    </div>
+                    <div class="line_content">
+                        가로 : <input type="number" name="m_width" value="{{ $data->m_width }}" />
+                        세로 : <input type="number" name="m_height" value="{{ $data->m_height }}" />
+                    </div>
+                </div>
+            </div>
+            <span id="append_target">
+                <div class="write_line cate_file">
+                    <div class="all_line">
+                        <div class="line_title">
+                            파일선택
+                        </div>
+                        <div class="line_content">
+                            <input type="file" name="writer_file[]" /><a target="blank" href="">[파일미리보기]</a>
+                        </div>
+                    </div>
+                </div>
+            </span>
+
+			<div class="write_line cate_file">
+				<div class="all_line all_line_bottom">
+					<div class="line_title">
+						노출여부
+					</div>
+					<div class="line_content">
+						<label for="see1"><input type="radio" id="see1" name="use_status" value="Y" @if ($data->see == 'Y') checked @endif> 사용</label>
+						<label for="see2"><input type="radio" id="see2" name="use_status" value="N" @if ($data->see == 'N') checked @endif> 중지</label>
+					</div>
+				</div>
+			</div>
+            <div class="submit_box" style="text-align:center;margin-top:10px;">
+                <input type="submit" value="등록">
+                <input type="reset" value="취소">
+            </div>
+        </div>
+        @else
         @if (request()->segment(2) != 'member')
         <div class="write_box">
             <div class="write_line">
@@ -56,7 +143,7 @@
                 </div>
             </div>
             @endif
-            {{-- @if(request()->segment(2) == 'gallery') --}}
+            @if(request()->segment(2) != 'slide')
             <span id="append_target">
                 <div class="write_line">
                     <div class="all_line">
@@ -85,6 +172,38 @@
                     </div>
                 </div>
             </div>
+            @endif
+            @if(request()->segment(2) != 'slide' && request()->segment(2) != 'popup' && request()->segment(2) != 'slide' && request()->segment(2) != 'press' && request()->segment(2) != 'video' && request()->segment(2) != 'gallery')
+            <span id="append_target_file">
+                <div class="write_line">
+                    <div class="all_line">
+                        <div class="line_title">
+                            파일 선택
+                        </div>
+                        <div class="line_content">
+                            <input type="file" name="writer_file3[]" />
+                            {{-- <span class="set">사이즈 : [1:1 비율 ex) 500x500]</span> --}}
+                            <span style="cursor: pointer" class="add_file2">파일 추가 +</span>
+                        </div>
+                    </div>
+                </div>
+            </span>
+            <div class="write_line">
+                <div class="all_line">
+                    <div class="line_title" style="vertical-align: top">
+                        파일 정보
+                    </div>
+                    <div class="line_content">
+                        @foreach ($data_file_info as $data_file_info)
+                        
+                        <span class="img_info">- 파일 {{$data_file_info_num++}} <a href="/storage/app/images/{{ $data_file_info->real_file_name }}" download="{{ $data_file_info->file_name }}" target="_blank">[파일 다운로드]</a> <a href="javascript: control2({{$data_file_info->idx}})" style="color: #ff0000;">[삭제]</a></span>
+                        <br/>
+                        
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @endif
             {{-- @endif --}}
             <div class="write_line">
                 <div class="all_line">
@@ -184,7 +303,8 @@
                 <input type="submit" value="등록">
                 <input type="reset" value="취소" onclick="history.go(-1);">
             </div>
-        @endif
+            @endif
+            @endif
     </form>
     <script type="text/javascript">
         function passcheck(){
@@ -206,6 +326,93 @@
         <input type="hidden" name="write_type" value="{{ request()->segment(3) }}" />
         <input type="hidden" name="writer" value="{{ session('user_id') }}" />
         <input type="hidden" name="parent_idx" value="{{ session('user_idx') }}" />
+        @if (request()->segment(2) == 'popup')
+        <div class="write_box">
+            <div class="write_line">
+                <div class="all_line all_line_top">
+                    <div class="line_title">
+                        카테고리
+                    </div>
+                    <div class="line_content">
+						<input type="text" name="category" value="popup" readonly style="border:none;" />
+                    </div>
+                </div>
+			</div>
+			<div class="write_line">
+                <div class="all_line">
+						<div class="line_title">
+							제목
+						</div>
+						<div class="line_content">
+							<input type="text" name="subject" value="" />
+						</div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업위치
+                    </div>
+                    <div class="line_content">
+                        <label for="lefttop"><input type="radio" name="pop_position" id="lefttop" value="lefttop" />좌측상단</label>
+                        <label for="righttop"><input type="radio" name="pop_position" id="righttop" value="righttop" />우측상단</label>
+                        <label for="leftbot"><input type="radio" name="pop_position" id="leftbot" value="leftbot" />좌측하단</label>
+                        <label for="rightbot"><input type="radio" name="pop_position" id="rightbot" value="rightbot" />우측하단</label>
+                    </div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업크기
+                    </div>
+                    <div class="line_content">
+                        가로 : <input type="number" name="i_width" value="" />
+                        세로 : <input type="number" name="i_height" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업여백
+                    </div>
+                    <div class="line_content">
+                        가로 : <input type="number" name="m_width" value="" />
+                        세로 : <input type="number" name="m_height" value="" />
+                    </div>
+                </div>
+            </div>
+            <span id="append_target">
+                <div class="write_line cate_file">
+                    <div class="all_line">
+                        <div class="line_title">
+                            파일선택
+                        </div>
+                        <div class="line_content">
+                            <input type="file" name="writer_file[]" /><a target="blank" href="">[파일미리보기]</a>
+                        </div>
+                    </div>
+                </div>
+            </span>
+
+			<div class="write_line cate_file">
+				<div class="all_line all_line_bottom">
+					<div class="line_title">
+						노출여부
+					</div>
+					<div class="line_content">
+						<label for="see1"><input type="radio" id="see1" name="use_status" value="Y" > 사용</label>
+						<label for="see2"><input type="radio" id="see2" name="use_status" value="N" > 중지</label>
+					</div>
+				</div>
+			</div>
+            <div class="submit_box" style="text-align:center;margin-top:10px;">
+                <input type="submit" value="등록">
+                <input type="reset" value="취소">
+            </div>
+        </div>
+        @else
         @if (request()->segment(2) != 'member')
         <div class="write_box">
             <div class="write_line">
@@ -252,7 +459,7 @@
                 </div>
             </div>
             @endif
-            {{-- @if(request()->segment(2) == 'gallery') --}}
+            @if(request()->segment(2) != 'slide')
             <span id="append_target">
                 <div class="write_line">
                     <div class="all_line">
@@ -267,6 +474,23 @@
                     </div>
                 </div>
             </span>
+            @endif
+            @if(request()->segment(2) != 'slide' && request()->segment(2) != 'popup' && request()->segment(2) != 'slide' && request()->segment(2) != 'press' && request()->segment(2) != 'video' && request()->segment(2) != 'gallery')
+            <span id="append_target_file">
+                <div class="write_line">
+                    <div class="all_line">
+                        <div class="line_title">
+                            파일 선택
+                        </div>
+                        <div class="line_content">
+                            <input type="file" name="writer_file3[]" />
+                            {{-- <span class="set">사이즈 : [1:1 비율 ex) 500x500]</span> --}}
+                            <span style="cursor: pointer" class="add_file2">파일 추가 +</span>
+                        </div>
+                    </div>
+                </div>
+            </span>
+            @endif
             {{-- @endif --}}
             <div class="write_line">
                 <div class="all_line">
@@ -377,7 +601,7 @@
                 <input type="reset" value="취소" onclick="history.go(-1);">
             </div>
         @endif
-        
+        @endif
     </form>
     @endif
 </div>
@@ -444,9 +668,9 @@
         CKEDITOR.config.allowedContent = true;
     });
 
-    var append_item = '<div class="write_line"><div class="all_line"><div class="line_title">이미지 선택</div> <div class="line_content"> <input type="file" name="writer_file2[]" /><span style="cursor: pointer" class="add_file2"> 이미지 추가 +</span></div></div></div>';
+    var append_item = '<div class="write_line"><div class="all_line"><div class="line_title">파일 선택</div> <div class="line_content"> <input type="file" name="writer_file3[]" /></div></div></div>';
     $('.add_file2').click(function(){
-        $(append_item).appendTo("#append_target")
+        $(append_item).appendTo("#append_target_file")
     });
 
 </script>

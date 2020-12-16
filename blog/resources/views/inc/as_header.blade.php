@@ -37,7 +37,7 @@
                 <div class="nav_con">
                     <div class="na_title nav_img"><i class="fas fa-desktop"></i>메인페이지 설정</div>
                     <div class="na_title dep2">
-                        <div class="nav_sub"><a href="/as_admin/slide/list">메인 슬라이드</a></div>
+                        {{-- <div class="nav_sub"><a href="/as_admin/slide/list">메인 슬라이드</a></div> --}}
                         <div class="nav_sub"><a href="/as_admin/popup/list">팝업</a></div>
                     </div>
                     <div class="na_title nav_img"><i class="far fa-newspaper"></i>News</div>
@@ -65,6 +65,11 @@
                     </div>
                     <div class="top_nav">
                         <ul>
+                            <a href="/as_admin/member/list">
+                                <li>
+                                    <i class="fas fa-key"></i>계정관리
+                                </li>
+                            </a>
                             <a href="/">
                                 <li>
                                     <i class="fas fa-desktop"></i>홈페이지

@@ -54,7 +54,7 @@ Route::get('/as_admin/main_set', 'Back@main_set');
 Route::post('/as_admin/change_main_set', 'Back@change_main_set');
 
 Route::get('/as_admin/slide/list', 'Back@list');
-Route::get('/as_admin/popup/list', 'Back@list');
+Route::get('/as_admin/popup/list', 'Back@popup_list');
 Route::get('/as_admin/notice/list', 'Back@list');
 Route::get('/as_admin/gallery/list', 'Back@list');
 Route::get('/as_admin/member/list', 'Back@list');
@@ -67,7 +67,7 @@ Route::get('/as_admin/video/list', 'Back@list');
 Route::get('/as_admin/gallery/list', 'Back@list');
 
 Route::get('/as_admin/slide/write', 'Back@write');
-Route::get('/as_admin/popup/write', 'Back@write');
+Route::get('/as_admin/popup/write', 'Back@popup_write');
 Route::get('/as_admin/notice/write', 'Back@write');
 Route::get('/as_admin/gallery/write', 'Back@write');
 Route::get('/as_admin/member/write', 'Back@write');
@@ -82,7 +82,7 @@ Route::get('/as_admin/video/write', 'Back@write');
 Route::get('/as_admin/gallery/write', 'Back@write');
 
 Route::get('/as_admin/slide/modify', 'Back@write');
-Route::get('/as_admin/popup/modify', 'Back@write');
+Route::get('/as_admin/popup/modify', 'Back@popup_write');
 Route::get('/as_admin/notice/modify', 'Back@write');
 Route::get('/as_admin/gallery/modify', 'Back@write');
 Route::get('/as_admin/member/modify', 'Back@write');
@@ -97,7 +97,7 @@ Route::get('/as_admin/video/modify', 'Back@write');
 Route::get('/as_admin/gallery/modify', 'Back@write');
 
 Route::post('/as_admin/slide/write_action', 'Back@write_action');
-Route::post('/as_admin/popup/write_action', 'Back@write_action');
+Route::post('/as_admin/popup/write_action', 'Back@popup_write_action');
 Route::post('/as_admin/notice/write_action', 'Back@write_action');
 Route::post('/as_admin/gallery/write_action', 'Back@write_action');
 Route::post('/as_admin/member/write_action', 'Back@write_action');
@@ -116,3 +116,12 @@ Route::post('/as_admin/popup/control', 'Back@delete_action');
 Route::post('/as_admin/notice/control', 'Back@delete_action');
 Route::post('/as_admin/gallery/control', 'Back@delete_action');
 Route::post('/as_admin/member/control', 'Back@delete_action');
+Route::post('/as_admin/gallery/control', 'Back@delete_action');
+Route::post('/as_admin/member/control', 'Back@delete_action');
+Route::post('/as_admin/press/control', 'Back@delete_action');
+Route::post('/as_admin/event/control', 'Back@delete_action');
+Route::post('/as_admin/startUp/control', 'Back@delete_action');
+Route::post('/as_admin/article/control', 'Back@delete_action');
+Route::post('/as_admin/report/control', 'Back@delete_action');
+Route::post('/as_admin/video/control', 'Back@delete_action');
+Route::post('/as_admin/gallery/control', 'Back@delete_action');

@@ -2,10 +2,20 @@
 <div class="content_wrap inner project_sub">
     <div class="sec_top">
         <div class="flex_box">
+            <div class="text_box mo_block">
+                <div class="top_line">
+                    <p>Project</p>
+                    <span class="bar"></span>
+                    <p class="color_blue"><b>04</b></p>
+                </div>
+                <h2>
+                    스마트 건설 디지털<br/>플랫폼 및 테스트베드                
+                </h2>
+            </div>
             <div class="img_box">
                 <img src="/img/project_sub04_img01.png" alt="">
             </div>
-            <div class="text_box">
+            <div class="text_box mo_none">
                 <div class="top_line">
                     <p>Project</p>
                     <span class="bar"></span>
@@ -45,6 +55,9 @@
             <div class="tabs_info">
                 <ul class="tabs_info_inner">
                     <li class="flex_box">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub04_img02.png" alt="">
+                        </div>
                         <h3>디지털 데이터 통합표준 기반 건설생산 프로세스<br/>통합관리 및 스마트 지식관리 기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -54,11 +67,14 @@
                             <div class="line_blue">도로분야 디지털 정보기반 스마트 지식관리 통합체계 및 디지털화 인덱스 평가기술 개발</div>
                             <div class="line_blue">도로분야 디지털 통합정보 환경기반 모듈러 생애주기 공정지원 스마트 딜리버리 시스템 개발</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub04_img02.png" alt="">
                         </div>
                     </li>
                     <li class="flex_box" style="display: none">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub04_img03.png" alt="">
+                        </div>
                         <h3>디지털 데이터 통합표준 기반 건설생산 프로세스<br/>통합관리 및 스마트 지식관리 기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -71,11 +87,14 @@
                             <div class="line_blue">디지털 트윈 모델 기반 건설 공정 시각화 및 의사결정 지원 기술 개발</div>
                             <div class="line_blue">스마트 도로 건설 정보 제공 기술 개발</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub04_img03.png" alt="">
                         </div>
                     </li>
                     <li class="flex_box" style="display: none">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub04_img04.png" alt="">
+                        </div>
                         <h3>스마트 건설기술 종합 테스트베드 구축 및 운영기술 개발 </h3>
                         <div class="text_box">
                             <p>
@@ -86,7 +105,7 @@
                             <div class="line_blue">스마트 건설기술 제도개선 및 실용화 기반 조성</div>
                             <div class="line_blue">스마트 건설기술 실증 지원</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub04_img04.png" alt="">
                         </div>
                     </li>

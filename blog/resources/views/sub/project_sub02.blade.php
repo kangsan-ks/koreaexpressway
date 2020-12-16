@@ -2,16 +2,26 @@
 <div class="content_wrap inner project_sub">
     <div class="sec_top">
         <div class="flex_box">
-            <div class="img_box">
-                <img src="/img/project_sub02_img01.png" alt="">
-            </div>
-            <div class="text_box">
+            <div class="text_box mo_block">
                 <div class="top_line">
                     <p>Project</p>
                     <span class="bar"></span>
                     <p class="color_blue"><b>02</b></p>
                 </div>
                 <h2>
+                    도로구조물<br/>스마트 건설기술
+                </h2>
+            </div>
+            <div class="img_box">
+                <img src="/img/project_sub02_img01.png" alt="">
+            </div>
+            <div class="text_box">
+                <div class="top_line mo_none">
+                    <p>Project</p>
+                    <span class="bar"></span>
+                    <p class="color_blue"><b>02</b></p>
+                </div>
+                <h2 class="mo_none">
                     도로구조물<br/>스마트 건설기술
                 </h2>
                 <p>
@@ -47,6 +57,9 @@
             <div class="tabs_info">
                 <ul class="tabs_info_inner">
                     <li class="flex_box">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub02_img02.png" alt="">
+                        </div>
                         <h3>디지털 기반 도로구조물 설계-제작-시공 지원기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -59,11 +72,14 @@
                             <div class="line_blue">콘크리트 프리팹 부재 제작/시공 혁신 기술</div>
                             <div class="line_blue">강구조 프리팹 부재 제작/시공 혁신 기술</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub02_img02.png" alt="">
                         </div>
                     </li>
                     <li class="flex_box" style="display: none">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub02_img03.png" alt="">
+                        </div>
                         <h3>도로구조물 원격·자동화 시공 기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -73,11 +89,14 @@
                             <div class="line_blue">로보틱 기반 교량 고소/고위험 시공 원격·자동화 기술 개발</div>
                             <div class="line_blue">머신러닝 기반 TBM 스마트 운용 기술 개발</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub02_img03.png" alt="">
                         </div>
                     </li>
                     <li class="flex_box" style="display: none">
+                        <div class="img_box mo_block">
+                            <img src="/img/project_sub02_img04.png" alt="">
+                        </div>
                         <h3>지능형 도로구조물 시공품질 관리 기술 개발</h3>
                         <div class="text_box">
                             <p>
@@ -87,7 +106,7 @@
                             <div class="line_blue">형상계측 기반 시공 중 도로구조물 시공성 판단 및 형상관리 기술</div>
                             <div class="line_blue">복합 센싱정보 기반 도로구조물 운반/시공 중 구조 건전성 및 시공품질 모니터링 기술</div>
                         </div>
-                        <div class="img_box">
+                        <div class="img_box mo_none">
                             <img src="/img/project_sub02_img04.png" alt="">
                         </div>
                     </li>
