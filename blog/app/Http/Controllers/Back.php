@@ -15,6 +15,8 @@ use App\User;
 use Auth;
 use DB;
 use App\Classes\jsonRPCClient;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Back extends Controller
 
@@ -111,6 +113,12 @@ class Back extends Controller
 	}
 
 	public function delete_action(Request $request) {
+        if($request->table_type == 'file_list'){
+            DB::table('file_list')
+			->where('idx', $request->idx)
+			->delete();
+			exit;
+        }
 		if($request->segment(2) == 'popup'){
 			DB::table('poplayer')
 			->where('idx', $request->idx)
@@ -125,7 +133,12 @@ class Back extends Controller
 			->delete();
 			exit;
 		}
-	}
+    }
+    public function delete_action2(Request $request) {
+        DB::table('file_list')
+			->where('parent_idx', $request->idx)
+			->delete();
+    }
 
 	public function popup_list(Request $request) {
 
@@ -292,7 +305,7 @@ class Back extends Controller
 		}elseif($boardType != 'g1allery'){
 
 			$query = DB::table('board')
-					->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'));
+					->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx and contents = "images" LIMIT 1) AS real_file_name'));
 			if($user_id != "admin"){
 				$query->where('parent_idx', session('user_idx'));
 			}
@@ -600,7 +613,7 @@ class Back extends Controller
 						'writer' => $request->writer,
 					]
 				);
-				
+				if( isset($_FILES['writer_file2']) ){
 				$file = array();
 				$i = 0;
 				foreach($_FILES['writer_file2']['name'] as $key => $value) {
@@ -650,8 +663,9 @@ class Back extends Controller
 
 					$i++;
 
-				}
-
+                }
+            }
+            if( isset($_FILES['writer_file3']) ){
 				$file = array();
 				$i = 0;
 				foreach($_FILES['writer_file3']['name'] as $key => $value) {
@@ -701,7 +715,8 @@ class Back extends Controller
 
 					$i++;
 
-				}
+                }
+            }
 
 			}
 
@@ -721,7 +736,7 @@ class Back extends Controller
 				$insert_id = DB::table('board')->insertGetId(
 					[
 						'subject' => $request->subject,
-						'contents' => $request->subject2,
+						'contents' => $request->contents,
 						'link_value' => $request->link_value,
 						'hash_tag' => $request->hash_tag,
 						'writer' => $request->writer,
@@ -734,7 +749,7 @@ class Back extends Controller
 					]
 				);
 
-				
+				if(isset($_FILES['writer_file2'])){
 				$file = array();
 				$i = 0;
 				foreach($_FILES['writer_file2']['name'] as $key => $value) {
@@ -784,8 +799,9 @@ class Back extends Controller
 
 					$i++;
 
-				}
-
+                }
+            }
+            if(isset($_FILES['writer_file3'])){
 				$file = array();
 				$i = 0;
 				foreach($_FILES['writer_file3']['name'] as $key => $value) {
@@ -835,7 +851,8 @@ class Back extends Controller
 
 					$i++;
 
-				}
+                }
+            }
 				echo '<script>alert("게시글 작성이 완료됐습니다.");location.href="/as_admin/'.$boardType.'/list";</script>';
 				exit;
 			}elseif($boardType == 'slide'){
@@ -946,7 +963,183 @@ class Back extends Controller
 		// $return_list = array();
 
 		// return view("/boffice/write", $return_list);
-	}
+    }
+    
+    public function research_count(Request $request) {
+
+		if(empty($request->reg_date1)) { 
+			$reg_date1 = date ("Y-m", strtotime("-6 month", strtotime(date("Y-m"))));
+			$request->reg_date1 = $reg_date1;
+		} else {
+			$reg_date1 = $request->reg_date1;
+		}
+		if(empty($request->reg_date2)) {
+			$reg_date2 = date ("Y-m");
+			$request->reg_date2 = $reg_date2;
+		} else {
+			$reg_date2 = $request->reg_date2;
+		}
+		
+
+		$reg_date1 = date ("Y-m", strtotime("-1 month", strtotime($reg_date1)));
+
+		$i = 0;
+		while (strtotime($reg_date1) < strtotime($reg_date2)) {
+		
+			$reg_date1 = date ("Y-m", strtotime("+1 month", strtotime($reg_date1)));
+
+			$statistics_pc_count = DB::table('statistics') 
+					->select(DB::raw('count(*) as cnt'))
+					->where('access_type', 'PC')
+					->where('reg_date', 'like', '%'.$reg_date1.'%')
+					->get();
+
+			$statistics_mobile_count = DB::table('statistics') 
+					->select(DB::raw('count(*) as cnt'))
+					->where('access_type', 'MOBILE')
+					->where('reg_date', 'like', '%'.$reg_date2.'%')
+					->get();
+		
+
+			$return_list['pc_list'][$i] = $statistics_pc_count;
+			$return_list['mobile_list'][$i] = $statistics_mobile_count;
+
+			$i++;
+		}
+
+		//if(empty($request->reg_date1)) $reg_date1 = date ("Y-m-d", strtotime("-6 day", strtotime(date("Y-m-d"))));
+		//else $reg_date1 = $request->reg_date1;
+		//if(empty($request->reg_date2)) $reg_date2 = date ("Y-m-d");
+		//else $reg_date2 = $request->reg_date2;
+//echo $request->reg_date1;
+//echo $request->reg_date2;
+//exit;
+
+		$return_list['reg_date3'] = $request->reg_date1;
+		$return_list['reg_date1'] = $request->reg_date1;
+		$return_list['reg_date2'] = $request->reg_date2;
+
+		return view("/boffice/statisitics_list", $return_list);
+    }
+    
+    public function search_excel_down2(Request $request) {
+
+        if(empty($request->reg_date1)) { 
+			$reg_date1 = date ("Y-m", strtotime("-6 month", strtotime(date("Y-m"))));
+			$request->reg_date1 = $reg_date1;
+		} else {
+			$reg_date1 = $request->reg_date1;
+		}
+		if(empty($request->reg_date2)) {
+			$reg_date2 = date ("Y-m");
+			$request->reg_date2 = $reg_date2;
+		} else {
+			$reg_date2 = $request->reg_date2;
+		}
+		
+
+		$reg_date1 = date ("Y-m", strtotime("-1 month", strtotime($reg_date1)));
+
+		$i = 0;
+		while (strtotime($reg_date1) < strtotime($reg_date2)) {
+		
+            $reg_date1 = date ("Y-m", strtotime("+1 month", strtotime($reg_date1)));
+            
+            $statistics_all = DB::table('statistics') 
+					->select(DB::raw('*'))
+                    ->where('reg_date', 'like', '%'.$reg_date1.'%')
+                    ->get();
+                    
+			$statistics_all_count = DB::table('statistics') 
+					->select(DB::raw('count(*) as cnt'))
+					->where('reg_date', 'like', '%'.$reg_date1.'%')
+                    ->get();
+		
+
+            $array_reg_date1[$i]= $reg_date1;
+			$array_statistics_all[$i] = $statistics_all;
+			$array_statistics_all_count[$i] = $statistics_all_count;
+
+			$i++;
+		}
+
+		//if(empty($request->reg_date1)) $reg_date1 = date ("Y-m-d", strtotime("-6 day", strtotime(date("Y-m-d"))));
+		//else $reg_date1 = $request->reg_date1;
+		//if(empty($request->reg_date2)) $reg_date2 = date ("Y-m-d");
+		//else $reg_date2 = $request->reg_date2;
+//echo $request->reg_date1;
+//echo $request->reg_date2;
+//exit;
+
+		$satisfication_data_count = DB::table('statistics') 
+				->select(DB::raw('*'))
+				->whereBetween('reg_date', [$request->reg_date1.'-01', $request->reg_date2.'-31'])
+				->get()->count();
+
+		if($satisfication_data_count <= 0) {
+			echo "<script>alert('엑셀출력 데이터가 없습니다.');history.go(-1);</script>";
+			exit;
+		}
+
+		require_once '/home/apache/htdocs/blog/vendor/autoload.php';
+		/*
+		$datas = array(
+			array('name' => '김정호', 'tel' => '010-1234-1234', 'bank' => '국민은행'),
+			array('name' => '홍길동', 'tel' => '010-5678-5678', 'bank' => '한국은행')
+		);
+		*/
+
+		foreach($array_reg_date1 as $key => $value) {
+            
+            $statistics_all_count2 = DB::table('statistics') 
+                                ->select(DB::raw('count(*) as cnt'))
+                                ->where('reg_date', 'like', '%'.$value.'%')
+                                ->get();
+
+			$datas[$key]['reg_date'] = $value;
+			$datas[$key]['cnt'] = $statistics_all_count2[0]->cnt;
+		}
+
+		$cells = array(
+			'A' => array(15, 'reg_date', '년월'),
+			'B' => array(20, 'cnt',  '접속수'),
+		);
+
+
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		
+		
+		foreach ($cells as $key => $val) {
+			$cellName = $key.'1';
+
+			$sheet->getColumnDimension($key)->setWidth($val[0]);
+			$sheet->getRowDimension('1')->setRowHeight(25);
+			$sheet->setCellValue($cellName, $val[2]);
+			$sheet->getStyle($cellName)->getFont()->setBold(true);
+			$sheet->getStyle($cellName)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+			$sheet->getStyle($cellName)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+		}
+		
+
+		for ($i = 2; $row = array_shift($datas); $i++) {
+			foreach ($cells as $key => $val) {
+				$sheet->setCellValue($key.$i, $row[$val[1]]);
+			}
+		}
+
+		$filename = 'excel';
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment; filename="'.$filename.'.xlsx"');
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('php://output');
+
+
+    }
+    
+
 
 }
 ?>

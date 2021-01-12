@@ -35,10 +35,12 @@
                     <span>{{session('user_id')}}</span><a href="/as_admin/logout"><i class="fas fa-sign-out-alt"></i></a>
                 </div>
                 <div class="nav_con">
-                    <div class="na_title nav_img"><i class="fas fa-desktop"></i>메인페이지 설정</div>
+                    <div class="na_title nav_img"><i class="fas fa-desktop"></i>홈페이지 관리</div>
                     <div class="na_title dep2">
                         {{-- <div class="nav_sub"><a href="/as_admin/slide/list">메인 슬라이드</a></div> --}}
-                        <div class="nav_sub"><a href="/as_admin/popup/list">팝업</a></div>
+                        <div class="nav_sub"><a href="/as_admin/popup/list">팝업 관리</a></div>
+                        <div class="nav_sub"><a href="/as_admin/statistics_connect">통계 보기</a></div>
+                        {{-- <div class="nav_sub"><a href="/as_admin/contact/list">문의 관리</a></div> --}}
                     </div>
                     <div class="na_title nav_img"><i class="far fa-newspaper"></i>News</div>
                     <div class="na_title dep2">
@@ -48,7 +50,7 @@
                     </div>
                     <div class="na_title nav_img"><i class="fas fa-book"></i>Library</div>
                     <div class="na_title dep2">
-                        <div class="nav_sub"><a href="/as_admin/articel/list">Article</a></div>
+                        <div class="nav_sub"><a href="/as_admin/article/list">Article</a></div>
                         <div class="nav_sub"><a href="/as_admin/report/list">Report</a></div>
                         <div class="nav_sub"><a href="/as_admin/video/list">Video</a></div>
                     </div>

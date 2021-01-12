@@ -13,7 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//캐시삭제
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    return 'DONE'; //Return anything
+});
+
 Route::get('/', 'Front@main');
+
+
 
 Route::get('/news/press/list', 'Front@list');
 Route::get('/news/event/list', 'Front@list');
@@ -29,7 +38,7 @@ Route::get('/news/startUp/view', 'Front@view');
 Route::get('/library/article/view', 'Front@view');
 Route::get('/library/report/view', 'Front@view');
 Route::get('/library/video/view', 'Front@view');
-Route::get('/about/gallery/view', 'Front@view');
+Route::get('/aboutUs/gallery/view', 'Front@view');
 
 Route::get('/project/all', 'Front@project');
 Route::get('/project/sub01', 'Front@project');
@@ -40,6 +49,8 @@ Route::get('/aboutUs/business', 'Front@aboutUs');
 Route::get('/aboutUs/organization', 'Front@organization');
 
 Route::get('/search/page_search', 'Front@page_search');
+Route::get('/contact', 'Front@contact');
+Route::post('/contact_action', 'Front@contact_action');
 
 Route::get('/as_admin/login', 'Back@as_login');
 Route::post('/as_admin/login_action', 'Back@as_login_action');
@@ -65,6 +76,7 @@ Route::get('/as_admin/article/list', 'Back@list');
 Route::get('/as_admin/report/list', 'Back@list');
 Route::get('/as_admin/video/list', 'Back@list');
 Route::get('/as_admin/gallery/list', 'Back@list');
+Route::get('/as_admin/contact/list', 'Back@list');
 
 Route::get('/as_admin/slide/write', 'Back@write');
 Route::get('/as_admin/popup/write', 'Back@popup_write');
@@ -95,6 +107,7 @@ Route::get('/as_admin/article/modify', 'Back@write');
 Route::get('/as_admin/report/modify', 'Back@write');
 Route::get('/as_admin/video/modify', 'Back@write');
 Route::get('/as_admin/gallery/modify', 'Back@write');
+Route::get('/as_admin/contact/modify', 'Back@write');
 
 Route::post('/as_admin/slide/write_action', 'Back@write_action');
 Route::post('/as_admin/popup/write_action', 'Back@popup_write_action');
@@ -125,3 +138,6 @@ Route::post('/as_admin/article/control', 'Back@delete_action');
 Route::post('/as_admin/report/control', 'Back@delete_action');
 Route::post('/as_admin/video/control', 'Back@delete_action');
 Route::post('/as_admin/gallery/control', 'Back@delete_action');
+
+Route::get('/as_admin/statistics_connect', 'Back@research_count');
+Route::POST('/search_excel_down2', 'Back@search_excel_down2');

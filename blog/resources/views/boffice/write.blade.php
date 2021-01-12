@@ -143,7 +143,7 @@
                 </div>
             </div>
             @endif
-            @if(request()->segment(2) != 'slide')
+            @if(request()->segment(2) != 'slide' && request()->segment(2) != 'contact')
             <span id="append_target">
                 <div class="write_line">
                     <div class="all_line">
@@ -151,7 +151,7 @@
                             이미지 선택
                         </div>
                         <div class="line_content">
-                            <input type="file" name="writer_file2[]" /> <span class="set">사이즈 : [1:1 비율 ex) 500x500]</span>
+                            <input type="file" name="writer_file2[]" /> <span class="set"></span>
                             {{-- <span style="cursor: pointer" class="add_file2">이미지 추가 +</span> --}}
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                 </div>
             </div>
             @endif
-            @if(request()->segment(2) != 'slide' && request()->segment(2) != 'popup' && request()->segment(2) != 'slide' && request()->segment(2) != 'press' && request()->segment(2) != 'video' && request()->segment(2) != 'gallery')
+            @if(request()->segment(2) != 'slide' && request()->segment(2) != 'popup' && request()->segment(2) != 'slide' && request()->segment(2) != 'press' && request()->segment(2) != 'video' && request()->segment(2) != 'gallery'  && request()->segment(2) != 'contact')
             <span id="append_target_file">
                 <div class="write_line">
                     <div class="all_line">
@@ -204,7 +204,20 @@
                 </div>
             </div>
             @endif
+            @if (request()->segment(2) == 'contact')
+            <div class="write_line">
+                <div class="all_line">
+                    <div class="line_title" style="vertical-align: top">
+                        이메일
+                    </div>
+                    <div class="line_content">
+                        <input type="text" value="{{ $data->email }}" name="email" />
+                    </div>
+                </div>
+            </div>
+            @endif
             {{-- @endif --}}
+            @if (request()->segment(2) != 'contact')
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_title">
@@ -262,8 +275,11 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="submit_box" style="text-align:center;margin-top:10px;">
+                @if (request()->segment(2) != 'contact')
                 <input type="submit" value="등록">
+                @endif
                 <input type="reset" value="취소" onclick="history.go(-1);">
             </div>
         </div>
@@ -300,7 +316,9 @@
                 </div>
             </div>
             <div class="submit_box" style="text-align:center;margin-top:10px;">
+                @if (request()->segment(2) != 'contact')
                 <input type="submit" value="등록">
+                @endif
                 <input type="reset" value="취소" onclick="history.go(-1);">
             </div>
             @endif

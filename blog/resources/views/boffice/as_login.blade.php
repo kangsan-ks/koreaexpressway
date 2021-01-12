@@ -12,7 +12,8 @@
 	<body>
 		<div id="login_con">
 			<div id="login_box">
-				<h1><img src="/img/logo.png" style="filter: brightness(0);"></h1>
+                {{-- filter: brightness(0); --}}
+				<h1><img src="/img/logo.png" style=""></h1>
 		        <form name="login_form" action="/as_admin/login_action" method="post" onsubmit="javascript:login_check();">
 					{{ csrf_field() }}
 		            <input type="text" name="id" placeholder="아이디" required>

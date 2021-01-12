@@ -25,7 +25,7 @@
         </table>
     </div>
     @endif
-    @if(request()->segment(2) != 'press' && request()->segment(2) != 'article' && request()->segment(2) != 'report' && request()->segment(2) != 'video' && request()->segment(2) != 'gallery')
+    @if(request()->segment(2) != 'press')
     <div class="list_style_02 list_style">
         <ul>
             @foreach ($data as $data)
@@ -42,7 +42,9 @@
                     @else
                     <span>{{ $data->start_period }}</span>
                     @endif
-                    {!! $data->contents !!}
+                    <div class="cont">
+                        {!! $data->contents !!}
+                    </div>
                 </div>
             </li>
             @endforeach
@@ -60,8 +62,13 @@
                 @else
                 <a href="/{{ request()->segment(1).'/'.request()->segment(2).'/view?idx='.$data2->idx }}">
                 @endif
+                
                     <div class="img_box">
+                        @if(request()->segment(2) == 'video')
+                        <img src="{{ $data2->link_value }}" alt="">
+                        @else
                         <img src="/storage/app/images/{{ $data2->real_file_name }}" alt="">
+                        @endif
                     </div>
                     <div class="text_box">
                         <h4>{{ $data2->subject }}</h4>
@@ -125,17 +132,36 @@
         {!! $paging_view !!}
     </div>
 </div>
+@if(request()->segment(2) == 'video')
+<script>
+    $(function(){
+        $('.list_style_03 .img_box img').each(function(){
+            var src = $(this).attr('src');
+            // console.log(src)
+            // var src = $(a).find('iframe').attr('src');
+                var cut_idx = src.indexOf('watch?v=');
+                var src_new = src.substr(cut_idx+8,30);
+                $(this).attr('src', '//img.youtube.com/vi/'+src_new+'/mqdefault.jpg');
+                
+                // $(this).css({backgroundImage: 'url(//img.youtube.com/vi/'+src_new+'/mqdefault.jpg)'});
+        });
+    });
+</script>
+@endif
 <script type="text/javascript">
     $(function(){
+        $('.list_style_02 .right .cont p img').remove();
+        //$('.list_style_02 .right .cont p').remove();
+
         $('#sub .list_style_04 .bar_line').height($('#sub .list_style_04').height());
 
         function list_tab(){
             if($('.list_style_tabs a').eq(0).hasClass('on') == true){
-                $('.list_style_03').hide();
-                $('.list_style_02').show();
-            }else{
                 $('.list_style_02').hide();
                 $('.list_style_03').show();
+            }else{
+                $('.list_style_03').hide();
+                $('.list_style_02').show();
             }
         }
 

@@ -47,7 +47,7 @@
                 <div class="f_info_outer mo_none">
                     <div class="inner">
                         <p>(18489)경기도 화성시 동탄순환대로 17길 24</p>
-                        <p>개인정보책임자 : 홍길동 (abc@abc.com)ㅣE-mail :smartconstruction@ex.co.krㅣTEL : 031-8098-6407</p>
+                        <p>E-mail :smartconstruction@ex.co.krㅣTEL : 031-8098-6407</p>
                         <p>COPYRIGHT (C) 스마트건설사업단, ALL RIGHTS RESERVED.</p>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             <a href="#none">이메일무단수집거부</a>
                         </div>
                         <div class="f_info_inner">
-                            <p>(18489)경기도 화성시 동탄순환대로 17길 24<br/>개인정보책임자 : 홍길동 (abc@abc.com)<br/>E-mail :smartconstruction@ex.co.kr TEL : 031-8098-6407</p>
+                            <p>(18489)경기도 화성시 동탄순환대로 17길 24<br/>E-mail :smartconstruction@ex.co.kr TEL : 031-8098-6407</p>
                             <p>COPYRIGHT (C) 스마트건설사업단, ALL RIGHTS RESERVED.</p>
                         </div>
                     </div>

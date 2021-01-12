@@ -2,8 +2,8 @@
 <div class="content_wrap inner project_sub">
     <div class="sec_top">
         <div class="flex_box">
-            <div class="text_box">
-                <div class="top_line mo_block">
+            <div class="text_box mo_block">
+                <div class="top_line">
                     <p>Project</p>
                     <span class="bar"></span>
                     <p class="color_blue"><b>03</b></p>
@@ -15,8 +15,8 @@
             <div class="img_box">
                 <img src="/img/project_sub03_img01.png" alt="">
             </div>
-            <div class="text_box">
-                <div class="top_line mo_none">
+            <div class="text_box mo_none">
+                <div class="top_line">
                     <p>Project</p>
                     <span class="bar"></span>
                     <p class="color_blue"><b>03</b></p>

@@ -21,6 +21,70 @@ class Front extends Controller
 {
     
     public function main(Request $request) {
+        $commons = new CommonFunction();
+
+		$agent = $commons->getBrowser();
+		$device = "";
+		$walletSize = 0;
+		$curreny_id = !$request->cu ? '' : $request->cu;
+		
+		if(stripos($agent['userAgent'], 'android-web-app') !== false) {
+			$device = 'webapp';
+		} else if(stripos($agent['userAgent'], 'Android') !== false) {
+			$device = 'Android';
+		} else if(stripos($agent['userAgent'], 'iPhone') !== false) {
+			$device = 'iPhone';
+		} else {
+			$device = 'browser';
+		}
+
+		// if($device == 'iPhone' || $device == 'Android' || $device == 'webapp') {
+
+		// 	$statistics_1_count = DB::table('statistics') 
+		// 			->select(DB::raw('count(*) as cnt'))
+		// 			->where('ip', $_SERVER['REMOTE_ADDR'])
+		// 			->where('access_type', 'MOBILE')
+		// 			->where('reg_date', date("Y-m-d"))
+		// 			->first();
+
+		// 	if($statistics_1_count->cnt <= 0) {
+
+		// 		DB::table('statistics')->insert(
+		// 			[
+		// 				'access_type' => 'MOBILE',
+		// 				'ip' => $_SERVER['REMOTE_ADDR'],
+		// 				'reg_date' => date("Y-m-d"),
+		// 				'reg_time' => date("H:i:s"),
+		// 				'out_url'  => request()->headers->get('referer'),
+		// 			]
+		// 		);
+
+		// 	}
+
+		// } else {
+
+		// 	$statistics_1_count = DB::table('statistics') 
+		// 			->select(DB::raw('count(*) as cnt'))
+		// 			->where('ip', $_SERVER['REMOTE_ADDR'])
+		// 			->where('access_type', 'PC')
+		// 			->where('reg_date', date("Y-m-d"))
+		// 			->first();
+
+		// 	if($statistics_1_count->cnt <= 0) {
+
+		// 		DB::table('statistics')->insert(
+		// 			[
+		// 				'access_type' => 'PC',
+		// 				'ip' => $_SERVER['REMOTE_ADDR'],
+		// 				'reg_date' => date("Y-m-d"),
+		// 				'reg_time' => date("H:i:s"),
+		// 				'out_url'  => request()->headers->get('referer'),
+		// 			]
+		// 		);
+
+		// 	}
+
+		// }
 		$week_before = date("Y-m-d", strtotime("-1 week"));
         $latest = DB::table('board') 
 					->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
@@ -28,7 +92,7 @@ class Front extends Controller
 					->orWhere('board_type', 'article')
 					->orWhere('board_type', 'report')
 					->orderBy('idx', 'desc')
-                    ->limit(3)
+                    ->limit(10)
 					->get();
 		$latest2 = DB::table('board') 
 					->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
@@ -36,7 +100,7 @@ class Front extends Controller
 					->orWhere('board_type', 'article')
 					->orWhere('board_type', 'report')
 					->orderBy('idx', 'desc')
-                    ->limit(3)
+                    ->limit(10)
 					->get();
 
 		$video_first = DB::table('board') 
@@ -64,8 +128,8 @@ class Front extends Controller
 		$press = DB::table('board') 
                     ->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
 					->where('board_type', 'press')
-					->where('reg_date', '>', $week_before)
 					->orderBy('idx', 'desc')
+					->limit(10)
 					->get();
 					
         // $gallery = DB::table('board')
@@ -406,7 +470,7 @@ class Front extends Controller
         $boardType = request()->segment(2);
 
 		$paging_option = array(
-			"pageSize" => 5,
+			"pageSize" => 6,
 			"blockSize" => 5
 		);
 
@@ -423,24 +487,10 @@ class Front extends Controller
 		
 
         $query = DB::table('board')
-        ->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx LIMIT 1) AS real_file_name'))
+        ->select(DB::raw('*, (SELECT real_file_name FROM file_list WHERE parent_idx = board.idx and contents = "images" LIMIT 1) AS real_file_name'))
         ->where('board_type', $boardType)
         ->orderBy('idx', 'desc');
-        // $query->where(function($query_set2) {
-        //         $query_set2->where('top_type', 'Y')
-        //         ->orWhere('top_type', null);
-        // });
-		
-		//$query->where('top_type', '<>', 'Y');
-		//$query->orWhere('top_type', null);
-		
-		// if($request->category_type) {
-		// 	$query->where('category', $request->category_type);
-		// }
 
-		// if(request()->segment(2) == "ey_data_room" && !$request->category_type) {
-		// 	$query->where('category', 1);
-		// }
 
 		if($request->page != "" && $request->page > 1) {
 			$query->skip(($request->page - 1) * $paging_option["pageSize"]);
@@ -491,6 +541,31 @@ class Front extends Controller
 
 		return view('sub/view', $return_list);
 
+    }
+
+    public function contact(Request $request) {
+
+		return view('sub/contact');
+
+	}
+	
+	public function contact_action(Request $request) {
+
+		DB::table('board')->insert([
+			'subject' => $request->subject,
+			'board_type' => $request->board_type,
+			'email' => $request->email,
+			'contents' => $request->contents,
+			'start_period' => \Carbon\Carbon::now(),
+			'reg_date' => \Carbon\Carbon::now(),
+		]);
+
+		echo '<script>alert("문의 작성이 완료됐습니다.");location.href="/";</script>';
+
+    }
+
+    public function aboutUs(Request $request) {
+        return view("sub/business");
     }
 
 }

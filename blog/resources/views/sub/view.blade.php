@@ -14,7 +14,7 @@
             @if($data->link_value != '')
             <div class="link_box">
                 <p>
-                    <a href="#none" class="view_inner"><img src="/img/link_ico.png" alt=""> {{$data->link_value}}</a>
+                    <a href="{{$data->link_value}}" target="blank" class="view_inner"><img src="/img/link_ico.png" alt=""> {{$data->link_value}}</a>
                 </p>
             </div>
             @endif

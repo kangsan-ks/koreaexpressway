@@ -1,7 +1,7 @@
 
 			<?php
 			error_reporting(0);
-			$link = mysqli_connect("127.0.0.1", "root", "", "smartcity");
+			$link = mysqli_connect("127.0.0.1", "root", "asom12#$", "smartcity");
 			$sql = "SELECT * FROM poplayer WHERE see='Y'";
 			$result = mysqli_query($link, $sql);
 			$i = 1;
